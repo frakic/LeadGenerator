@@ -1,15 +1,20 @@
+using BitMouse.LeadGenerator.Contract.Users;
+using BitMouse.LeadGenerator.Infrastructure.AspNetCore.Validation;
+using FluentValidation;
+using FluentValidation.AspNetCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+//Add fluent validation
+builder.Services.AddValidatorsFromAssemblyContaining(typeof(UserRequestDtoValidator));
+builder.Services.AddFluentValidationAutoValidation();
+
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();

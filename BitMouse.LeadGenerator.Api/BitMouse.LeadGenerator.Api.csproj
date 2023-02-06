@@ -9,9 +9,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.4.0" />
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="7.0.2" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.17.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\BitMouse.LeadGenerator.Contract\BitMouse.LeadGenerator.Contract.csproj" />
+    <ProjectReference Include="..\BitMouse.LeadGenerator.Infrastructure\BitMouse.LeadGenerator.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>
