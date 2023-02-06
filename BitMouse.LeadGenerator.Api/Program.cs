@@ -1,4 +1,5 @@
 using BitMouse.LeadGenerator.Contract.Users;
+using BitMouse.LeadGenerator.Infrastructure.AspNetCore.Middleware.Error;
 using FluentValidation;
 using FluentValidation.AspNetCore;
 
@@ -12,6 +13,11 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddValidatorsFromAssemblyContaining(typeof(UserRequestDtoValidator));
 builder.Services.AddFluentValidationAutoValidation();
 
+//Add exception handlers
+builder.Services.AddTransient<ExceptionHandlerFactory>();
+builder.Services.AddTransient<IExceptionHandler, DefaultExceptionHandler>();
+builder.Services.AddTransient<IExceptionHandler, FluentValidationExceptionHandler>();
+
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
@@ -23,6 +29,8 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
+
+app.UseMiddleware<ErrorMiddleware>();
 
 app.MapControllers();
 
