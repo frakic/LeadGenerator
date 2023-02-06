@@ -1,5 +1,4 @@
 using BitMouse.LeadGenerator.Contract.Users;
-using BitMouse.LeadGenerator.Infrastructure.AspNetCore.Validation;
 using FluentValidation;
 using FluentValidation.AspNetCore;
 
