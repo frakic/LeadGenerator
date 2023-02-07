@@ -6,6 +6,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <UserSecretsId>82a465e0-307b-4bb0-8898-f33fea3f1a2d</UserSecretsId>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    <DockerComposeProjectPath>..\docker-compose.dcproj</DockerComposeProjectPath>
   </PropertyGroup>
 
   <ItemGroup>
@@ -18,6 +19,7 @@
   <ItemGroup>
     <ProjectReference Include="..\BitMouse.LeadGenerator.Contract\BitMouse.LeadGenerator.Contract.csproj" />
     <ProjectReference Include="..\BitMouse.LeadGenerator.Infrastructure\BitMouse.LeadGenerator.Infrastructure.csproj" />
+    <ProjectReference Include="..\BitMouse.LeadGenerator.Service\BitMouse.LeadGenerator.Service.csproj" />
   </ItemGroup>
 
 </Project>

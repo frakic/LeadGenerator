@@ -1,0 +1,27 @@
+version: '3.4'
+
+services:
+  bitmouse.leadgenerator.api:
+    image: ${DOCKER_REGISTRY-}bitmouseleadgeneratorapi
+    build:
+      context: .
+      dockerfile: BitMouse.LeadGenerator.Api/Dockerfile
+    ports:
+        - 5000:80
+        - 5001:443
+    networks:
+        - integration
+
+  bitmouse.leadgenerator.integration.api:
+    image: ${DOCKER_REGISTRY-}bitmouseleadgeneratorintegrationapi
+    build:
+      context: .
+      dockerfile: BitMouse.LeadGenerator.Integration.Api/Dockerfile
+    ports:
+        - 5002:80
+        - 5003:443
+    networks:
+        - integration
+
+networks:
+  integration:

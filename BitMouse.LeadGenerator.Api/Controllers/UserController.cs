@@ -7,9 +7,16 @@ namespace BitMouse.LeadGenerator.Api.Controllers;
 [ApiController]
 public class UserController : Controller
 {
-    [HttpPost]
-    public async Task<ActionResult> SaveUserAsync(UserRequestDto input)
+    private readonly IUserService _userService;
+
+    public UserController(IUserService userService)
     {
-        throw new NotImplementedException();
+        _userService = userService;
+    }
+
+    [HttpPost]
+    public async Task SaveUserAsync(UserRequestDto request)
+    {
+        await _userService.SaveUserAsync(request);
     }
 }

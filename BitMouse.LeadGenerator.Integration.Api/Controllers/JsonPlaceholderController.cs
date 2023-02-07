@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BitMouse.LeadGenerator.Integration.Api.Controllers
 {
-    [Route("api/integrations/json-placeholder")]
+    [Route("api/json-placeholder")]
     [ApiController]
     public class JsonPlaceholderController : Controller
     {
@@ -15,7 +15,7 @@ namespace BitMouse.LeadGenerator.Integration.Api.Controllers
             _jsonPlaceholderService = jsonPlaceholderService;
         }
 
-        [HttpGet]
+        [HttpGet("users")]
         public async Task<ActionResult<UserDto?>> GetUserAsync([FromQuery] GetUsersRequest request)
         {
             var user = (await _jsonPlaceholderService.GetUsersAsync(request))
