@@ -23,7 +23,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BitMouse.LeadGenerator.Inte
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{E9CF721A-E086-483F-969E-E1B215E6B74F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BitMouse.LeadGenerator.Service", "BitMouse.LeadGenerator.Service\BitMouse.LeadGenerator.Service.csproj", "{371786DF-8A4B-41C6-AB02-EAD48D184CC4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BitMouse.LeadGenerator.Service", "BitMouse.LeadGenerator.Service\BitMouse.LeadGenerator.Service.csproj", "{371786DF-8A4B-41C6-AB02-EAD48D184CC4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Database", "Database", "{90AFAC41-B260-4BEC-A7CD-3B2E7601D117}"
+	ProjectSection(SolutionItems) = preProject
+		setup.sql = setup.sql
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
