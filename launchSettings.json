@@ -8,7 +8,8 @@
       "composeLaunchUrl": "{Scheme}://localhost:{ServicePort}/swagger",
       "serviceActions": {
         "bitmouse.leadgenerator.api": "StartDebugging",
-        "bitmouse.leadgenerator.integration.api": "StartDebugging"
+        "bitmouse.leadgenerator.integration.api": "StartDebugging",
+        "bitmouse.leadgenerator.database": "StartWithoutDebugging"
       }
     }
   }
