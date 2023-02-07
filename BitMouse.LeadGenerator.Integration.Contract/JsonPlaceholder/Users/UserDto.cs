@@ -7,7 +7,7 @@ namespace BitMouse.LeadGenerator.Integration.Contract.JsonPlaceholder.Users;
 public class UserDto
 {
     [JsonPropertyName("id")]
-    public int? IntegrationId { get; set; }
+    public int? Id { get; set; }
 
     [JsonPropertyName("name")]
     public string? Name { get; set; }

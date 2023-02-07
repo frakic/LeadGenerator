@@ -1,5 +1,6 @@
 ﻿using BitMouse.LeadGenerator.Integration.Contract.JsonPlaceholder;
 using BitMouse.LeadGenerator.Integration.Service.Settings;
+using System.Web;
 
 namespace BitMouse.LeadGenerator.Integration.Service.HttpClients.JsonPlaceholder;
 
@@ -17,7 +18,7 @@ public class JsonPlaceholderHttpClient
 
     public async Task<string> GetUsersAsTextAsync(GetUsersRequest request)
     {
-        var requestUrl = $"{_jsonPlaceholderApiSettings.BaseUrl}?email={request.Email}";
+        var requestUrl = ResolveRequestUrl(request);
         var response = await _httpClient.GetAsync(requestUrl);
 
         if (response.IsSuccessStatusCode)
@@ -26,5 +27,13 @@ public class JsonPlaceholderHttpClient
         }
         //TODO: log the exception
         throw new Exception("Failed to get data from JsonPlaceholder.");
+    }
+
+    private string ResolveRequestUrl(GetUsersRequest request)
+    {
+        var name = $"{request.FirstName}+{request.LastName}";
+        var url = $"{_jsonPlaceholderApiSettings.BaseUrl}?email={request.Email}&name={name}";
+
+        return url;
     }
 }
