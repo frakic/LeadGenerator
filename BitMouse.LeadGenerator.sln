@@ -27,6 +27,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BitMouse.LeadGenerator.Serv
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BitMouse.LeadGenerator.Model", "BitMouse.LeadGenerator.Model\BitMouse.LeadGenerator.Model.csproj", "{9DD6F630-76FE-4018-91FF-C0EF72478271}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BitMouse.LeadGenerator.Repository", "BitMouse.LeadGenerator.Repository\BitMouse.LeadGenerator.Repository.csproj", "{5D3192A8-B6C7-413D-B139-C1BEF22798AD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -69,6 +71,10 @@ Global
 		{9DD6F630-76FE-4018-91FF-C0EF72478271}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9DD6F630-76FE-4018-91FF-C0EF72478271}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9DD6F630-76FE-4018-91FF-C0EF72478271}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5D3192A8-B6C7-413D-B139-C1BEF22798AD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5D3192A8-B6C7-413D-B139-C1BEF22798AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5D3192A8-B6C7-413D-B139-C1BEF22798AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5D3192A8-B6C7-413D-B139-C1BEF22798AD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -82,6 +88,7 @@ Global
 		{6D0D5D0C-59E1-4759-A1DD-DE8CF0C89A26} = {D6E95F82-DEB7-438B-A423-E114BC53C340}
 		{371786DF-8A4B-41C6-AB02-EAD48D184CC4} = {9AA0A6CA-142D-4A27-987B-1B875BF59745}
 		{9DD6F630-76FE-4018-91FF-C0EF72478271} = {9AA0A6CA-142D-4A27-987B-1B875BF59745}
+		{5D3192A8-B6C7-413D-B139-C1BEF22798AD} = {9AA0A6CA-142D-4A27-987B-1B875BF59745}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E260993A-7C47-443C-BF40-4B0049AB6312}

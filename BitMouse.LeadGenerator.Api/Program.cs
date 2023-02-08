@@ -1,5 +1,8 @@
 using BitMouse.LeadGenerator.Contract.Users;
 using BitMouse.LeadGenerator.Infrastructure.AspNetCore.Middleware.Error;
+using BitMouse.LeadGenerator.Model.Users;
+using BitMouse.LeadGenerator.Repository.Settings;
+using BitMouse.LeadGenerator.Repository.Users;
 using BitMouse.LeadGenerator.Service.Settings;
 using BitMouse.LeadGenerator.Service.Users;
 using FluentValidation;
@@ -10,6 +13,9 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container
 builder.Services.AddTransient<IUserService, UserService>();
+
+// Add repositories to the container
+builder.Services.AddTransient<IUserRepository, UserRepository>();
 
 // Add settings to the container
 builder.Services.Configure<IntegrationApiSettings>(builder.Configuration.GetSection(nameof(IntegrationApiSettings)));
@@ -26,6 +32,10 @@ builder.Services.AddFluentValidationAutoValidation();
 builder.Services.AddTransient<ExceptionHandlerFactory>();
 builder.Services.AddTransient<IExceptionHandler, DefaultExceptionHandler>();
 builder.Services.AddTransient<IExceptionHandler, FluentValidationExceptionHandler>();
+
+// Add connection strings
+builder.Services.Configure<ConnectionStrings>(builder.Configuration.GetSection(nameof(ConnectionStrings)));
+builder.Services.AddScoped(config => config.GetService<IOptionsSnapshot<ConnectionStrings>>()!.Value);
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
