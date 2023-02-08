@@ -8,6 +8,7 @@
     <DockerServiceUrl>{Scheme}://localhost:{ServicePort}/swagger</DockerServiceUrl>
     <DockerServiceName>bitmouse.leadgenerator.api</DockerServiceName>
     <DockerServiceName>bitmouse.leadgenerator.integration.api</DockerServiceName>
+    <DockerServiceName>bitmouse.leadgenerator.database</DockerServiceName>
   </PropertyGroup>
   <ItemGroup>
     <None Include="docker-compose.override.yml">
