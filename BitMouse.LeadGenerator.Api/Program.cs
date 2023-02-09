@@ -1,9 +1,11 @@
+using BitMouse.LeadGenerator.Contract.Emails;
 using BitMouse.LeadGenerator.Contract.Users;
 using BitMouse.LeadGenerator.Infrastructure.AspNetCore.Middleware.Error;
 using BitMouse.LeadGenerator.Infrastructure.Settings;
 using BitMouse.LeadGenerator.Model.Users;
 using BitMouse.LeadGenerator.Query.Users;
 using BitMouse.LeadGenerator.Repository.Users;
+using BitMouse.LeadGenerator.Service.Emails;
 using BitMouse.LeadGenerator.Service.Settings;
 using BitMouse.LeadGenerator.Service.Users;
 using FluentValidation;
@@ -28,6 +30,7 @@ var appName = config.GetValue<string>("Serilog:Properties:ApplicationName");
 
 // Add application services to the container
 builder.Services.AddTransient<IUserService, UserService>();
+builder.Services.AddTransient<IEmailService, EmailService>();
 
 // Add domain services to the container
 builder.Services.AddTransient<UserManager>();
@@ -41,6 +44,9 @@ builder.Services.AddTransient<IUserQuery, UserQuery>();
 // Add settings to the container
 builder.Services.Configure<IntegrationApiSettings>(builder.Configuration.GetSection(nameof(IntegrationApiSettings)));
 builder.Services.AddScoped(config => config.GetService<IOptionsSnapshot<IntegrationApiSettings>>()!.Value);
+
+builder.Services.Configure<EmailSettings>(builder.Configuration.GetSection(nameof(EmailSettings)));
+builder.Services.AddScoped(config => config.GetService<IOptionsSnapshot<EmailSettings>>()!.Value);
 
 // Add http clients to the container
 builder.Services.AddHttpClient();

@@ -1,4 +1,5 @@
-﻿using BitMouse.LeadGenerator.Contract.Users;
+﻿using BitMouse.LeadGenerator.Contract.Emails;
+using BitMouse.LeadGenerator.Contract.Users;
 using BitMouse.LeadGenerator.Model.Users;
 using BitMouse.LeadGenerator.Service.Settings;
 using System.Net;
@@ -10,15 +11,19 @@ public class UserService : IUserService
 {
     private readonly IntegrationApiSettings _integrationApiSettings;
     private readonly HttpClient _httpClient;
+
     private readonly UserManager _userManager;
     private readonly IUserRepository _userRepository;
     private readonly IUserQuery _userQuery;
+
+    private readonly IEmailService _emailService;
 
     public UserService(IntegrationApiSettings integrationApiSettings,
         HttpClient httpClient,
         IUserRepository userRepository,
         UserManager userManager,
-        IUserQuery userQuery)
+        IUserQuery userQuery,
+        IEmailService emailService)
     {
         _integrationApiSettings = integrationApiSettings;
         _httpClient = httpClient;
@@ -26,6 +31,7 @@ public class UserService : IUserService
         _userRepository = userRepository;
         _userManager = userManager;
         _userQuery = userQuery;
+        _emailService = emailService;
     }
 
     public async Task<IEnumerable<BusinessUserDto>> GetBusinessUsersAsync()
@@ -50,6 +56,21 @@ public class UserService : IUserService
         }
 
         await _userRepository.InsertAsync(user);
+
+        await _emailService.SendAsync(new EmailDetailsDto
+        {
+            UserFirstName = request.FirstName,
+            UserLastName = request.LastName,
+            UserEmail = request.Email,
+            UserStreet = user.Address?.Street,
+            UserSuite = user.Address?.Suite,
+            UserCity = user.Address?.City,
+            UserZipcode = user.Address?.ZipCode,
+            UserLatitude = user.Address?.Geolocation?.Latitude,
+            UserLongitude = user.Address?.Geolocation?.Longitude,
+            UserPhone = user.ContactDetails?.Phone,
+            UserWebsite = user.ContactDetails?.Website
+        });
     }
 
     private string ResolveIntegrationUrl(UserRequestDto request)
