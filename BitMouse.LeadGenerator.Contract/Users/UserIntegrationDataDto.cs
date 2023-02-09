@@ -3,7 +3,7 @@ using BitMouse.LeadGenerator.Contract.Companies;
 
 namespace BitMouse.LeadGenerator.Contract.Users;
 
-public class UserDto
+public class UserIntegrationDataDto
 {
     public int? Id { get; set; }
     public string? Name { get; set; }

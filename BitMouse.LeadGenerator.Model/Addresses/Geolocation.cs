@@ -4,6 +4,10 @@ namespace BitMouse.LeadGenerator.Model.Addresses;
 
 public class Geolocation : Entity
 {
-    public string? Latitude { get; private set; }
-    public string? Longitude { get; private set; }
+    public string? Latitude { get; internal set; }
+    public string? Longitude { get; internal set; }
+
+    internal Geolocation()
+    {
+    }
 }

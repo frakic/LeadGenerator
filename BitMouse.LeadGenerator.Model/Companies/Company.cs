@@ -4,7 +4,11 @@ namespace BitMouse.LeadGenerator.Model.Companies;
 
 public class Company : Entity
 {
-    public string? Name { get; private set; }
-    public string? CatchPhrase { get; private set; }
-    public string? BusinessStrategy { get; private set; }
+    public string? Name { get; internal set; }
+    public string? CatchPhrase { get; internal set; }
+    public string? BusinessStrategy { get; internal set; }
+
+    internal Company()
+    {
+    }
 }

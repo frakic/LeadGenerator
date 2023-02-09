@@ -92,7 +92,7 @@ CREATE TABLE [User].[User](
 	[IntegrationId] [int] NULL,
 	[AddressId] [int] NULL,
 	[CompanyId] [int] NULL,
-	[DateCreated] [datetime] NOT NULL,
+	[DateCreated] [datetime2] NOT NULL,
  CONSTRAINT [PK_User] PRIMARY KEY CLUSTERED 
 (
 	[Id] ASC
@@ -150,7 +150,8 @@ CREATE PROCEDURE [User].spInsertUser
 	@FirstName nvarchar(100) = NULL, 
 	@LastName nvarchar(100) = NULL,
 	@Username nvarchar(100) = NULL,
-	@IntegrationId int = NULL
+	@IntegrationId int = NULL,
+	@DateCreated datetime2 = NULL
 AS
 BEGIN
 	SET NOCOUNT ON;
@@ -176,6 +177,30 @@ BEGIN
 	SELECT @ContactDetailsId = SCOPE_IDENTITY()
 
 	INSERT INTO [LeadGenerator].[User].[User] (FirstName, LastName, Username, ContactDetailsId, IntegrationId, AddressId, CompanyId, DateCreated)
-	VALUES (@FirstName, @LastName, @Username, @ContactDetailsId, @IntegrationId, @AddressId, @CompanyId, SYSDATETIME())
+	VALUES (@FirstName, @LastName, @Username, @ContactDetailsId, @IntegrationId, @AddressId, @CompanyId, @DateCreated)
+END
+GO
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		Filip Rakić
+-- Create date: 8.02.2023.
+-- Description:	Retrieve the date of last insertion for a user based on their email
+-- =============================================
+CREATE PROCEDURE [User].spGetDateCreatedByEmail 
+	@Email nvarchar(320) = NULL
+AS
+BEGIN
+	SET NOCOUNT ON;
+
+	SELECT TOP(1) u.DateCreated
+	FROM [LeadGenerator].[User].[User] u
+	JOIN [LeadGenerator].[User].[ContactDetails] cd
+	ON cd.[Id] = u.[ContactDetailsId]
+	WHERE cd.Email = @Email
+	ORDER BY 1 DESC
 END
 GO
