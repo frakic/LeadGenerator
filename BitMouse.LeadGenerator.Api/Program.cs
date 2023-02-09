@@ -11,8 +11,11 @@ using Microsoft.Extensions.Options;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container
+// Add application services to the container
 builder.Services.AddTransient<IUserService, UserService>();
+
+// Add domain services to the container
+builder.Services.AddTransient<UserManager>();
 
 // Add repositories to the container
 builder.Services.AddTransient<IUserRepository, UserRepository>();
@@ -36,6 +39,9 @@ builder.Services.AddTransient<IExceptionHandler, FluentValidationExceptionHandle
 // Add connection strings
 builder.Services.Configure<ConnectionStrings>(builder.Configuration.GetSection(nameof(ConnectionStrings)));
 builder.Services.AddScoped(config => config.GetService<IOptionsSnapshot<ConnectionStrings>>()!.Value);
+
+// Add builders
+builder.Services.AddTransient<IUserBuilder, UserBuilder>();
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();

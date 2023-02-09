@@ -92,7 +92,7 @@ CREATE TABLE [User].[User](
 	[IntegrationId] [int] NULL,
 	[AddressId] [int] NULL,
 	[CompanyId] [int] NULL,
-	[DateCreated] [datetime] NOT NULL,
+	[DateCreated] [datetime2(7)] NOT NULL,
  CONSTRAINT [PK_User] PRIMARY KEY CLUSTERED 
 (
 	[Id] ASC
@@ -177,5 +177,28 @@ BEGIN
 
 	INSERT INTO [LeadGenerator].[User].[User] (FirstName, LastName, Username, ContactDetailsId, IntegrationId, AddressId, CompanyId, DateCreated)
 	VALUES (@FirstName, @LastName, @Username, @ContactDetailsId, @IntegrationId, @AddressId, @CompanyId, SYSDATETIME())
+END
+GO
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		Filip Rakić
+-- Create date: 8.02.2023.
+-- Description:	Retrieve the date of last insertion for a user based on their email
+-- =============================================
+CREATE PROCEDURE [User].spDateCreatedByEmail 
+	@Email nvarchar(320) = NULL
+AS
+BEGIN
+	SET NOCOUNT ON;
+
+	SELECT u.DateCreated
+	FROM [LeadGenerator].[User].[User] u
+	JOIN [LeadGenerator].[User].[ContactDetails] cd
+	ON cd.[Id] = u.[ContactDetailsId]
+	WHERE cd.Email = @Email
 END
 GO

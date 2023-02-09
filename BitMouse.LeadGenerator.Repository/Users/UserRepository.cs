@@ -28,4 +28,19 @@ public class UserRepository : IUserRepository
 
         command.ExecuteNonQuery();
     }
+
+    public async Task<DateTime?> GetDateCreatedByEmail(string email)
+    {
+        using SqlConnection connection = new(_connectionStrings.LeadGenerator);
+        await connection.OpenAsync();
+
+        using SqlCommand command = new("User.spGetDateCreatedByEmail", connection);
+        command.CommandType = CommandType.StoredProcedure;
+
+        command.Parameters.AddWithValue("@Email", email);
+
+        var queryResult = (DateTime?)await command.ExecuteScalarAsync();
+
+        return queryResult;
+    }
 }
