@@ -47,8 +47,8 @@ public class UserQuery : IUserQuery
                 FirstName = (string)reader["FirstName"],
                 LastName = (string)reader["LastName"],
                 Email = (string)reader["Email"],
-                Phone = (string)reader["Phone"],
-                Website = (string)reader["Website"]
+                Phone = reader["Phone"]?.ToString(),
+                Website = reader["Website"]?.ToString()
             };
             businessUsers.Add(businessUser);
         }

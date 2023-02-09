@@ -9,8 +9,22 @@ using BitMouse.LeadGenerator.Service.Users;
 using FluentValidation;
 using FluentValidation.AspNetCore;
 using Microsoft.Extensions.Options;
+using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
+
+// Add logging
+builder.Host.UseSerilog();
+
+var config = new ConfigurationBuilder()
+    .AddJsonFile("appsettings.json")
+    .Build();
+
+Log.Logger = new LoggerConfiguration()
+    .ReadFrom.Configuration(config)
+    .CreateLogger();
+
+var appName = config.GetValue<string>("Serilog:Properties:ApplicationName");
 
 // Add application services to the container
 builder.Services.AddTransient<IUserService, UserService>();
@@ -68,4 +82,18 @@ app.UseMiddleware<ErrorMiddleware>();
 
 app.MapControllers();
 
-app.Run();
+try
+{
+    Log.Information($"{appName} is starting");
+
+    app.Run();
+}
+catch (Exception e)
+{
+    Log.Fatal(e, $"{appName} failed to start");
+}
+finally
+{
+    Log.CloseAndFlush();
+}
+
