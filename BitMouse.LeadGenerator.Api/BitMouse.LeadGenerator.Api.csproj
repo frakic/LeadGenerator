@@ -19,6 +19,7 @@
   <ItemGroup>
     <ProjectReference Include="..\BitMouse.LeadGenerator.Contract\BitMouse.LeadGenerator.Contract.csproj" />
     <ProjectReference Include="..\BitMouse.LeadGenerator.Infrastructure\BitMouse.LeadGenerator.Infrastructure.csproj" />
+    <ProjectReference Include="..\BitMouse.LeadGenerator.Query\BitMouse.LeadGenerator.Query.csproj" />
     <ProjectReference Include="..\BitMouse.LeadGenerator.Repository\BitMouse.LeadGenerator.Repository.csproj" />
     <ProjectReference Include="..\BitMouse.LeadGenerator.Service\BitMouse.LeadGenerator.Service.csproj" />
   </ItemGroup>

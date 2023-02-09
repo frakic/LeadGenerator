@@ -1,7 +1,8 @@
 using BitMouse.LeadGenerator.Contract.Users;
 using BitMouse.LeadGenerator.Infrastructure.AspNetCore.Middleware.Error;
+using BitMouse.LeadGenerator.Infrastructure.Settings;
 using BitMouse.LeadGenerator.Model.Users;
-using BitMouse.LeadGenerator.Repository.Settings;
+using BitMouse.LeadGenerator.Query.Users;
 using BitMouse.LeadGenerator.Repository.Users;
 using BitMouse.LeadGenerator.Service.Settings;
 using BitMouse.LeadGenerator.Service.Users;
@@ -19,6 +20,9 @@ builder.Services.AddTransient<UserManager>();
 
 // Add repositories to the container
 builder.Services.AddTransient<IUserRepository, UserRepository>();
+
+// Add queries to the container
+builder.Services.AddTransient<IUserQuery, UserQuery>();
 
 // Add settings to the container
 builder.Services.Configure<IntegrationApiSettings>(builder.Configuration.GetSection(nameof(IntegrationApiSettings)));

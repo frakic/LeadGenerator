@@ -6,19 +6,19 @@ namespace BitMouse.LeadGenerator.Model.Users;
 public class UserManager
 {
     private readonly IUserBuilder _userBuilder;
-    private readonly IUserRepository _userRepositry;
+    private readonly IUserQuery _userQuery;
 
     public UserManager(
         IUserBuilder userBuilder,
-        IUserRepository userRepositry)
+        IUserQuery userQuery)
     {
         _userBuilder = userBuilder;
-        _userRepositry = userRepositry;
+        _userQuery = userQuery;
     }
 
     public async Task<User> CreateBasicAsync(string firstName, string lastName, string email)
     {
-        var lastSaved = await _userRepositry.GetDateCreatedByEmail(email);
+        var lastSaved = await _userQuery.GetDateCreatedByEmailAsync(email);
         
         if (DateTime.UtcNow.AddMinutes(-1) < lastSaved)
         {
