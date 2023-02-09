@@ -204,3 +204,17 @@ BEGIN
 	ORDER BY 1 DESC
 END
 GO
+
+-- =============================================
+-- Author:		Filip Rakić
+-- Create date: 9.02.2023.
+-- Description:	Get users whose email addresses end in '.biz'
+-- =============================================
+CREATE VIEW [User].[vwBusinessUsers]
+AS
+SELECT	u.Id, u.FirstName, u.LastName, cd.Email, cd.Phone, cd.Website
+FROM		[User].[User] AS u
+INNER JOIN	[User].ContactDetails AS cd
+ON 		cd.Id = u.ContactDetailsId
+WHERE		(cd.Email LIKE '%.biz')
+GO

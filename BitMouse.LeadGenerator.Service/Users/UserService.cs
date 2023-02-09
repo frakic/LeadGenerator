@@ -12,18 +12,27 @@ public class UserService : IUserService
     private readonly HttpClient _httpClient;
     private readonly UserManager _userManager;
     private readonly IUserRepository _userRepository;
+    private readonly IUserQuery _userQuery;
 
     public UserService(IntegrationApiSettings integrationApiSettings,
         HttpClient httpClient,
         IUserRepository userRepository,
-        UserManager userManager)
+        UserManager userManager,
+        IUserQuery userQuery)
     {
         _integrationApiSettings = integrationApiSettings;
         _httpClient = httpClient;
         _httpClient.BaseAddress = new Uri(_integrationApiSettings.BaseUrl);
         _userRepository = userRepository;
         _userManager = userManager;
+        _userQuery = userQuery;
     }
+
+    public async Task<IEnumerable<BusinessUserDto>> GetBusinessUsersAsync()
+    {
+        return await _userQuery.GetBusinessUsersAsync();
+    }
+
     public async Task SaveUserAsync(UserRequestDto request)
     {
         var user = await _userManager

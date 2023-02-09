@@ -1,5 +1,5 @@
-﻿using BitMouse.LeadGenerator.Model.Users;
-using BitMouse.LeadGenerator.Repository.Settings;
+﻿using BitMouse.LeadGenerator.Infrastructure.Settings;
+using BitMouse.LeadGenerator.Model.Users;
 using System.Data;
 using System.Data.SqlClient;
 
@@ -47,20 +47,5 @@ public class UserRepository : IUserRepository
         command.Parameters.AddWithValue("@DateCreated", DateTime.UtcNow);
 
         command.ExecuteNonQuery();
-    }
-
-    public async Task<DateTime?> GetDateCreatedByEmail(string email)
-    {
-        using SqlConnection connection = new(_connectionStrings.LeadGenerator);
-        await connection.OpenAsync();
-
-        using SqlCommand command = new("User.spGetDateCreatedByEmail", connection);
-        command.CommandType = CommandType.StoredProcedure;
-
-        command.Parameters.AddWithValue("@Email", email);
-
-        var queryResult = (DateTime?)await command.ExecuteScalarAsync();
-
-        return queryResult;
     }
 }

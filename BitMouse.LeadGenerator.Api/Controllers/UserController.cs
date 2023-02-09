@@ -14,6 +14,12 @@ public class UserController : Controller
         _userService = userService;
     }
 
+    [HttpGet("business")]
+    public async Task<ActionResult<IEnumerable<BusinessUserDto>>> GetBusinessUsersAsync()
+    {
+        return (await _userService.GetBusinessUsersAsync()).ToList();
+    }
+
     [HttpPost]
     public async Task SaveUserAsync(UserRequestDto request)
     {
