@@ -29,8 +29,30 @@ public class UserQuery : IUserQuery
         return queryResult;
     }
 
-    public async Task<IEnumerable<BusinessUserDto>> GetBusinessUsersAsync(string email)
+    public async Task<IEnumerable<BusinessUserDto>> GetBusinessUsersAsync()
     {
-        throw new NotImplementedException();
+        var businessUsers = new List<BusinessUserDto>();
+
+        using SqlConnection connection = new(_connectionStrings.LeadGenerator);
+        await connection.OpenAsync();
+
+        using SqlCommand command = new("SELECT * FROM [User].vwBusinessUsers", connection);
+        using var reader = await command.ExecuteReaderAsync();
+
+        while (await reader.ReadAsync())
+        {
+            var businessUser = new BusinessUserDto
+            {
+                Id = (int)reader["Id"],
+                FirstName = (string)reader["FirstName"],
+                LastName = (string)reader["LastName"],
+                Email = (string)reader["Email"],
+                Phone = (string)reader["Phone"],
+                Website = (string)reader["Website"]
+            };
+            businessUsers.Add(businessUser);
+        }
+
+        return businessUsers;
     }
 }
