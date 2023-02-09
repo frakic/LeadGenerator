@@ -35,6 +35,7 @@ builder.Services.AddFluentValidationAutoValidation();
 builder.Services.AddTransient<ExceptionHandlerFactory>();
 builder.Services.AddTransient<IExceptionHandler, DefaultExceptionHandler>();
 builder.Services.AddTransient<IExceptionHandler, FluentValidationExceptionHandler>();
+builder.Services.AddTransient<IExceptionHandler, BusinessExceptionHandler>();
 
 // Add connection strings
 builder.Services.Configure<ConnectionStrings>(builder.Configuration.GetSection(nameof(ConnectionStrings)));

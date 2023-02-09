@@ -26,20 +26,21 @@ public class UserService : IUserService
     }
     public async Task SaveUserAsync(UserRequestDto request)
     {
-        //TODO: check if user has been saved in the past minute and return before calling the integration
-
-        await _userManager.CreateAsync(request.FirstName, request.LastName, request.Email);
+        var user = await _userManager
+            .CreateBasicAsync(request.FirstName, request.LastName, request.Email);
 
         var integrationRequestUrl = ResolveIntegrationUrl(request);
 
         var integrationResponse = await _httpClient.GetAsync(integrationRequestUrl);
 
-        var integrationUser = integrationResponse.StatusCode == HttpStatusCode.OK
-            ? await integrationResponse.Content.ReadFromJsonAsync<UserDto>()
-            : null;
+        if (integrationResponse.StatusCode == HttpStatusCode.OK)
+        {
+            var userIntegrationData = await integrationResponse.Content.ReadFromJsonAsync<UserIntegrationDataDto>();
 
-        //build user model
-        
+            _userManager.FillWithIntegrationData(user, userIntegrationData!);
+        }
+
+        await _userRepository.InsertAsync(user);
     }
 
     private string ResolveIntegrationUrl(UserRequestDto request)

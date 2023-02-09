@@ -5,16 +5,32 @@ namespace BitMouse.LeadGenerator.Model.Users;
 
 public class UserBuilder : IUserBuilder
 {
-    private readonly User _user = default!;
+    private User _user = default!;
 
     public UserBuilder()
     {
-
+        Clear();
     }
 
-    internal UserBuilder(string firstName, string lastName, string email)
+    public UserBuilder Clear()
+    {
+        _user = new User();
+
+        return this;
+    }
+
+    public UserBuilder WithBasicInfo(string firstName, string lastName, string email)
     {
         _user = new User(firstName, lastName, email);
+
+        return this;
+    }
+
+    public UserBuilder WithBasicUser(User user)
+    {
+        _user = user;
+
+        return this;
     }
 
     public UserBuilder WithContactDetails(string? phone, string? website)
@@ -71,6 +87,8 @@ public class UserBuilder : IUserBuilder
 
     public User Build()
     {
-        return _user;
+        var user = _user;
+        Clear();
+        return user;
     }
 }

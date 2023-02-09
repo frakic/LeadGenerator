@@ -2,6 +2,8 @@
 
 public interface IUserBuilder
 {
+    UserBuilder WithBasicInfo(string firstName, string lastName, string email);
+    UserBuilder WithBasicUser(User user);
     UserBuilder WithContactDetails(string? phone, string? website);
     UserBuilder WithAddress(string? street, string? suite, string? city, string? zipcode);
     UserBuilder WithGeolocation(string? latitude, string? longitude);
