@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="MailKit" Version="3.5.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\BitMouse.LeadGenerator.Contract\BitMouse.LeadGenerator.Contract.csproj" />
     <ProjectReference Include="..\BitMouse.LeadGenerator.Model\BitMouse.LeadGenerator.Model.csproj" />
   </ItemGroup>
