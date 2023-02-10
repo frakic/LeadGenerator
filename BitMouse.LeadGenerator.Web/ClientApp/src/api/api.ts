@@ -13,7 +13,7 @@ const callApi = (method: string, url: string, variables?: any) => {
       },
     }).then(
       (response) => {
-        resolve(response.json);
+        resolve(response.json());
       },
       (error) => {
         if (error.response) {
