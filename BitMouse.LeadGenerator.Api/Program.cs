@@ -1,3 +1,4 @@
+using BitMouse.LeadGenerator.Api.Settings;
 using BitMouse.LeadGenerator.Contract.Emails;
 using BitMouse.LeadGenerator.Contract.Users;
 using BitMouse.LeadGenerator.Infrastructure.AspNetCore.Middleware.Error;
@@ -68,6 +69,18 @@ builder.Services.AddScoped(config => config.GetService<IOptionsSnapshot<Connecti
 // Add builders
 builder.Services.AddTransient<IUserBuilder, UserBuilder>();
 
+// Add CORS
+var appSettings = builder.Configuration.Get<AppSettings>();
+builder.Services.AddCors(options =>
+{
+    options.AddDefaultPolicy(builder =>
+    {
+        builder.WithOrigins(appSettings!.AllowedOrigins)
+            .AllowAnyMethod()
+            .AllowAnyHeader();
+    });
+});
+
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -81,6 +94,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseCors();
 
 app.UseAuthorization();
 
