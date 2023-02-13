@@ -60,6 +60,10 @@ export function ContactPage() {
             {...register("email", {
               required: "Email name is required",
               maxLength: 320,
+              pattern: {
+                value: /\S+@\S+\.\S+/,
+                message: "Must be a valid email format",
+              },
             })}
           />
 

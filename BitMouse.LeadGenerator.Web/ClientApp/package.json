@@ -1,7 +1,12 @@
 {
-  "name": "vite-project",
+  "name": "lead-generator-web",
+  "author": {
+    "name": "Filip Rakić",
+    "email": "frakic@frakic.com",
+    "url": "https://github.com/frakic/LeadGenerator"
+  },
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -13,16 +18,15 @@
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
-    "@chakra-ui/react": "^2.4.9",
-    "@emotion/react": "^11.10.5",
-    "@emotion/styled": "^11.10.5",
-    "@mui/material": "^5.11.8",
     "@mui/lab": "^5.0.0-alpha.119",
+    "@mui/material": "^5.11.8",
     "@types/node": "^18.13.0",
     "@types/react": "^18.0.27",
     "@types/react-dom": "^18.0.10",
     "@vitejs/plugin-react": "^3.1.0",
+    "axios": "^1.3.2",
     "react-hook-form": "^7.43.1",
+    "react-query": "^3.39.3",
     "typescript": "^4.9.3",
     "vite": "^4.1.0"
   }

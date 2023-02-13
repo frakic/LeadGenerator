@@ -1,10 +1,15 @@
+import { QueryClient, QueryClientProvider } from "react-query";
+import { ColorTabs, ResponseHandler } from "./components";
+
 import "./App.css";
-import { ColorTabs } from "./components";
 
 function App() {
+  const queryClient = new QueryClient();
   return (
     <div className="App">
-      <ColorTabs />
+      <QueryClientProvider client={queryClient}>
+        <ColorTabs />
+      </QueryClientProvider>
     </div>
   );
 }

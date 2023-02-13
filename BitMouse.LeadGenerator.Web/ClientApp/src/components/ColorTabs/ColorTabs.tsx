@@ -4,11 +4,10 @@ import TabPanel from "@mui/lab/TabPanel";
 import TabContext from "@mui/lab/TabContext";
 import Box from "@mui/material/Box";
 
-import { ContactPage } from "../../features";
+import { ContactPage, BusinessUsers } from "../../features";
 import { SyntheticEvent, useState } from "react";
-import { BusinessUsers } from "../../features/BusinessUsers";
 
-export const ColorTabs = () => {
+export function ColorTabs() {
   const [value, setValue] = useState("contact");
 
   const handleChange = (e: SyntheticEvent, newValue: string) => {
@@ -34,4 +33,4 @@ export const ColorTabs = () => {
       </TabContext>
     </>
   );
-};
+}

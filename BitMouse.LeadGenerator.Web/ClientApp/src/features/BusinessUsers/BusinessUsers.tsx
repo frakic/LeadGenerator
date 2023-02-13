@@ -1,27 +1,21 @@
-import { useEffect, useState } from "react";
-import { BusinessUser } from "../../models";
+import { useQuery } from "react-query";
 import { getBusinessUsers as getBusinessUsersApi } from "../../api";
 import { UsersTable } from "../../components";
 
-export const BusinessUsers = () => {
-  const [users, setUsers] = useState([] as BusinessUser[]);
-
-  useEffect(() => {
-    getBusinessUsersApi().then((users) => {
-      setUsers(users);
-    });
-  });
+export function BusinessUsers() {
+  const query = useQuery("users", getBusinessUsersApi);
 
   return (
     <>
       <h1>Our business users</h1>
-      {users.length > 0 && (
-        <p>
-          We probably should've kept this data for ourselves, but... oh well
-          ¯\_(ツ)_/¯
-        </p>
+      {query.data && query.data.length > 0 ? (
+        <>
+          <p>This probably shouldn't be public, but... ¯\_(ツ)_/¯</p>
+          <UsersTable users={query.data} />
+        </>
+      ) : (
+        <p>There are no business users registered.</p>
       )}
-      <UsersTable users={users} />
     </>
   );
-};
+}
