@@ -1,22 +1,23 @@
-const callApi = (method: string, url: string, variables?: any) => {
-  const apiUrl = url.startsWith("/")
-    ? import.meta.env.VITE_APP_API_URL + url
-    : url;
+import axios, { AxiosRequestConfig } from "axios";
 
-  return new Promise((resolve, reject) => {
-    fetch(apiUrl, {
-      method: method,
-      body: method !== "GET" ? JSON.stringify(variables) : undefined,
-      mode: "cors",
+const callApi = (method: string, url: string, variables?: any) =>
+  new Promise((resolve, reject) => {
+    axios({
+      baseURL: import.meta.env.VITE_APP_API_URL,
+      url: url,
+      method,
+      params: method === "GET" ? variables : undefined,
+      data: method !== "GET" ? variables : undefined,
       headers: {
         "Content-Type": "application/json",
       },
-    }).then(
+      responseType: "json",
+    } as AxiosRequestConfig).then(
       (response) => {
-        resolve(response.json());
+        resolve(response.data);
       },
       (error) => {
-        if (error.response) {
+        if (error.response?.data) {
           reject(error.response.data.error || error.response.data.errors);
         } else {
           reject({
@@ -29,7 +30,6 @@ const callApi = (method: string, url: string, variables?: any) => {
       }
     );
   });
-};
 
 export const api = {
   get: (url: string, variables?: any) => callApi("GET", url, variables),

@@ -1,7 +1,7 @@
 import { BusinessUser, CreateUser } from "../models";
 import { api } from ".";
 
-const usersUrlPrefix: string = "/users";
+const usersUrlPrefix: string = "users";
 
 export const getBusinessUsers = async () => {
   return api.get(`${usersUrlPrefix}/business`) as Promise<BusinessUser[]>;
