@@ -21,7 +21,7 @@ public class UserController : Controller
     }
 
     [HttpPost]
-    public async Task SaveUserAsync(UserRequestDto request)
+    public async Task SaveUserAsync([FromBody] UserRequestDto request)
     {
         await _userService.SaveUserAsync(request);
     }
